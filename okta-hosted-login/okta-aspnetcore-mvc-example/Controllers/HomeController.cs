@@ -5,12 +5,12 @@ using okta_aspnetcore_mvc_example.Models;
 
 namespace okta_aspnetcore_mvc_example.Controllers
 {
-	using System;
-	using System.Net;
-	using Newtonsoft.Json;
+	using Atlassian.Jira;
 
 	public class HomeController : Controller
 	{
+		private const string Password = "";
+
 		public IActionResult Index()
 		{
 			return View();
@@ -44,19 +44,13 @@ namespace okta_aspnetcore_mvc_example.Controllers
 
 		public IActionResult Jira()
 		{
-			const string uri = "https://jira.kcura.com/rest/api/latest/search?jql=assignee=currentUser()&fields=id,key";
+			Jira jiraClient = Atlassian.Jira.Jira.CreateRestClient("https://jira.kcura.com", "avichay.kardash", Password);
 
-			using (var w = new WebClient())
-			{
-				string jsonData = string.Empty;
+			string jql = "assignee was currentUser()";// AFTER startOfMonth(-1) BEFORE startOfMonth() AND (status != Closed  OR status changed to closed AFTER startOfMonth(-1) )";
 
-				w.Headers.Add("Content-Type", "application/json");
-				jsonData = w.DownloadString(uri);
+			JiraUser user = jiraClient.Users.GetUserAsync("avichay.kardash").Result;
 
-
-				
-				//return !string.IsNullOrEmpty(jsonData) ? JsonConvert.DeserializeObject<T>(jsonData) : new T();
-			}
+			IPagedQueryResult<Issue> result = jiraClient.Issues.GetIssuesFromJqlAsync(new IssueSearchOptions(jql)).Result;
 
 			return View();
 		}
