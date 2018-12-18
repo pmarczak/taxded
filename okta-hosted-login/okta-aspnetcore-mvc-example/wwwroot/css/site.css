@@ -1,11 +1,16 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
+}
+
+a.reports-create {
+	padding: 8px 60px;
+	font-size: large;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+	margin-top: 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
