@@ -75,4 +75,5 @@ _[Ss]cripts
 *.dot[Cc]over
 /okta-hosted-login/.vs/okta-aspnetcore-mvc-example/DesignTimeBuild/.dtbcache
 /okta-hosted-login/.vs/okta-aspnetcore-mvc-example/v15/Server/sqlite3
-/okta-hosted-login/.vs/config/applicationhost.config
+bin
+.vs
