@@ -7,57 +7,58 @@ using Okta.AspNetCore;
 
 namespace TaxDeductionReporting
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	using Microsoft.AspNetCore.Authentication.Cookies;
 
-        public IConfiguration Configuration { get; }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            var oktaMvcOptions = new OktaMvcOptions();
-            Configuration.GetSection("Okta").Bind(oktaMvcOptions);
-            oktaMvcOptions.Scope = new List<string> { "openid", "profile", "email" };
-            oktaMvcOptions.GetClaimsFromUserInfoEndpoint = true;
+		public IConfiguration Configuration { get; }
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
-            //})
-            //.AddCookie()
-            //.AddOktaMvc(oktaMvcOptions);
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			var oktaMvcOptions = new OktaMvcOptions();
+			Configuration.GetSection("Okta").Bind(oktaMvcOptions);
+			oktaMvcOptions.Scope = new List<string> { "openid", "profile", "email" };
+			oktaMvcOptions.GetClaimsFromUserInfoEndpoint = true;
 
-            services.AddMvc();
+			services.AddAuthentication(options =>
+			{
+				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+				options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
+			})
+			.AddCookie()
+			.AddOktaMvc(oktaMvcOptions);
 
-        }
+			services.AddMvc();
+		}
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseBrowserLink();
+				app.UseDeveloperExceptionPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+			}
 
-            app.UseStaticFiles();
-            app.UseAuthentication();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-        }
-    }
+			app.UseStaticFiles();
+			app.UseAuthentication();
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller=Home}/{action=Index}/{id?}");
+			});
+		}
+	}
 }
