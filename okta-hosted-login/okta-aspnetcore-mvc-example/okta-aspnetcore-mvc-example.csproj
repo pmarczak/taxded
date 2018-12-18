@@ -4,9 +4,11 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>TaxDeductionReporting</AssemblyName>
     <RootNamespace>TaxDeductionReporting</RootNamespace>
+    <UserSecretsId>5280ae4e-aff8-4cba-b47d-4df57482bc48</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Atlassian.SDK" Version="10.4.0" />
     <PackageReference Include="knockoutjs" Version="3.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
