@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using TaxDeductionReporting.Models;
+using TaxDeductionReporting.Models.Calendar;
 
 namespace TaxDeductionReporting.Controllers
 {
@@ -13,7 +14,8 @@ namespace TaxDeductionReporting.Controllers
 
 			var model = new ReportViewModel
 			{
-				Date = reportDate
+				Date = reportDate,
+				Calendar = new CalendarViewModel()
 			};
 
 			return View(model);
