@@ -1,6 +1,4 @@
-using System;
-
-namespace okta_aspnetcore_mvc_example.Models
+namespace TaxDeductionReporting.Models
 {
     public class ErrorViewModel
     {

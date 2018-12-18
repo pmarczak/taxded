@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Okta.AspNetCore;
 
-namespace okta_aspnetcore_mvc_example.Controllers
+namespace TaxDeductionReporting.Controllers
 {
     public class AccountController : Controller
     {
