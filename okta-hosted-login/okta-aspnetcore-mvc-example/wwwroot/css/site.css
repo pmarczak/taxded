@@ -1,5 +1,6 @@
 ﻿body {
-    padding-bottom: 20px;
+	padding-bottom: 20px;
+	background-color: white;
 }
 
 a.reports-create {
@@ -11,30 +12,72 @@ a.reports-create {
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
 	margin-top: 20px;
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Carousel */
 .carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+	font-size: 20px;
+	line-height: 1.4;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+	width: 100%;
 }
 
 /* QR code generator */
 #qrCode {
-    margin: 15px;
+	margin: 15px;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+	/* Hide captions */
+	.carousel-caption {
+		display: none;
+	}
 }
+
+
+.calendar {
+	min-width: 300px
+}
+
+	.calendar table {
+		width: 100%;
+	}
+
+	.calendar .header .day {
+	}
+
+
+	.calendar .day, calendar .header .day {
+		padding: 15px 0;
+		text-align: center;
+		border: 1px solid white;
+		border-style: solid;
+		width: 20%;
+	}
+
+		.calendar .day.active {
+			cursor: pointer;
+		}
+
+			.calendar .day.active:hover {
+				border: 1px solid black;
+			}
+
+		.calendar .day.work {
+			background-color: green;
+		}
+
+		.calendar .day.holiday {
+			background-color: silver;
+		}
+
+
+		.calendar .day.vacation {
+			background-color: gray;
+		}

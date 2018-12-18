@@ -1,5 +1,62 @@
-﻿@model TaxDeductionReporting.Models.Calendar.CalendarViewModel
+﻿@using TaxDeductionReporting.Models.Calendar
+@model TaxDeductionReporting.Models.Calendar.CalendarViewModel
 
-<h4>CalendarViewModelek</h4>
+@{
+	var weeks = Model.Days.GroupBy(x => x.WeekIndex);
+}
 
+<div class="row calendar">
+	
+	<div class="col-md-8">
 
+		<table>
+			<thead class="header">
+			<tr>
+				@for (int it = 1; it < 6; it++)
+				{
+					<th class="day">
+						@(((DayOfWeek)it).ToString().Substring(0, 3))
+					</th>
+				}
+			</tr>
+			</thead>
+			<tbody>
+
+			@foreach (var week in @weeks)
+			{
+
+				<tr>
+					@for (int it = 1; it < 6; it++)
+					{
+						var day = week.FirstOrDefault(x => x.DayOfWeek == it);
+
+						if (day != null)
+						{
+							<td class="day active @day.Type.ToString().ToLower()">
+								@day.DayOfMonth
+							</td>
+						}
+						else
+						{
+							<td class="day"></td>
+						}
+					}
+				</tr>
+			}
+
+			</tbody>
+
+		</table>
+	</div>
+	
+	<div class="col-md-4 legenda">
+		
+		@foreach (CalendarDayType t in Enum.GetValues(typeof(CalendarDayType)))
+		{
+			<div>
+				<span>@t</span>
+			</div>
+		}
+
+	</div>
+</div>
