@@ -1,17 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using TaxDeductionReporting.Models;
 
 namespace TaxDeductionReporting.Controllers
 {
     public class ReportsController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
 		public IActionResult Create()
 		{
-			return View();
+			DateTime now = DateTime.UtcNow;
+			DateTime reportDate = new DateTime(now.Year, now.Month, 1).AddMonths(-1);
+
+			var model = new ReportViewModel
+			{
+				Date = reportDate
+			};
+
+			return View(model);
 		}
     }
 }
