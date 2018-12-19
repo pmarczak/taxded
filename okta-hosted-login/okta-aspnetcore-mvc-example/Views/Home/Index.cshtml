@@ -1,13 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
+
+
 <div class="row">
-	
+	<div>
+		<span data-bind="text: hello"></span>
+	</div>
 	<div class="col-sm-12" align="center">
 		<a class="btn btn-primary reports-create" asp-controller="Reports" asp-action="Create" role="button" aria-pressed="true">Create report</a>
 	</div>
-
 	<div class="col-md-3">
 		<h2>Application uses</h2>
 		<ul>
@@ -46,3 +49,8 @@
 		</ul>
 	</div>
 </div>
+
+@section Scripts
+{
+	<script src="~/js/app.js"></script>
+}

@@ -77,4 +77,10 @@ _[Ss]cripts
 /okta-hosted-login/.vs/okta-aspnetcore-mvc-example/v15/Server/sqlite3
 bin
 .vs
+/okta-hosted-login/okta-aspnetcore-mvc-example/node_modules/@types
+/okta-hosted-login/okta-aspnetcore-mvc-example/Scripts/app.js
+/okta-hosted-login/okta-aspnetcore-mvc-example/Scripts/app.js.map
+/okta-hosted-login/okta-aspnetcore-mvc-example/wwwroot/js/app.js
+/okta-hosted-login/okta-aspnetcore-mvc-example/wwwroot/js/app.js.map
+.vs
 PublishProfiles

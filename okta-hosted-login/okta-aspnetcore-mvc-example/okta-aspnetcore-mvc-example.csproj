@@ -1,18 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>TaxDeductionReporting</AssemblyName>
     <RootNamespace>TaxDeductionReporting</RootNamespace>
     <UserSecretsId>5280ae4e-aff8-4cba-b47d-4df57482bc48</UserSecretsId>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\app.js" />
+    <Content Remove="wwwroot\js\app.js.map" />
+    <Content Remove="wwwroot\js\app.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Atlassian.SDK" Version="10.4.0" />
     <PackageReference Include="knockoutjs" Version="3.4.2" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.AzureKeyVault.HostingStartup" Version="2.0.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Okta.Sdk" Version="1.1.0" />
   </ItemGroup>
 
@@ -23,6 +29,15 @@
   <ItemGroup>
     <Folder Include="Views\Helpers\" />
 	  <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\app.ts" />
   </ItemGroup>
 
 </Project>
