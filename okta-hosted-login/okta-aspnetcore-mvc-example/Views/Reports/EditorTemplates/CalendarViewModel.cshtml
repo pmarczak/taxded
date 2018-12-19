@@ -6,55 +6,58 @@
 }
 
 <div class="row calendar">
-	
-	<div class="col-md-8">
+
+	<div class="col-lg-10 col-md-8">
 
 		<table>
 			<thead class="header">
-			<tr>
-				@for (int it = 1; it < 6; it++)
-				{
-					<th class="day">
-						@(((DayOfWeek)it).ToString().Substring(0, 3))
-					</th>
-				}
-			</tr>
-			</thead>
-			<tbody>
-
-			@foreach (var week in @weeks)
-			{
-
 				<tr>
 					@for (int it = 1; it < 6; it++)
 					{
-						var day = week.FirstOrDefault(x => x.DayOfWeek == it);
-
-						if (day != null)
-						{
-							<td class="day active @day.Type.ToString().ToLower()">
-								@day.DayOfMonth
-							</td>
-						}
-						else
-						{
-							<td class="day"></td>
-						}
+						<th class="day">
+							@(((DayOfWeek)it).ToString().Substring(0, 3))
+						</th>
 					}
 				</tr>
-			}
+			</thead>
+			<tbody>
+
+				@foreach (var week in @weeks)
+				{
+
+					<tr>
+						@for (int it = 1; it < 6; it++)
+						{
+							var day = week.FirstOrDefault(x => x.DayOfWeek == it);
+
+							if (day != null)
+							{
+								<td class="day active @day.Type.ToString().ToLower()">
+									@day.DayOfMonth
+								</td>
+							}
+							else
+							{
+								<td class="day"></td>
+							}
+						}
+					</tr>
+				}
 
 			</tbody>
 
 		</table>
 	</div>
-	
-	<div class="col-md-4 legenda">
-		
+
+	<div class="col-lg-2 col-md-4 legend">
+
 		@foreach (CalendarDayType t in Enum.GetValues(typeof(CalendarDayType)))
 		{
 			<div>
-				<span>@t</span>
+				<span>
+					<img class="@t.ToString().ToLower()" width="16" height="16" />
+					@t
+				</span>
 			</div>
 		}
 

@@ -52,32 +52,57 @@ a.reports-create {
 	.calendar .header .day {
 	}
 
-
-	.calendar .day, calendar .header .day {
-		padding: 15px 0;
-		text-align: center;
-		border: 1px solid white;
-		border-style: solid;
-		width: 20%;
+	.calendar .legend {
+		margin-top: 0;
 	}
 
-		.calendar .day.active {
-			cursor: pointer;
+		.calendar .legend div {
+			display: inline;
+			margin-right: 5px;
+			word-break: keep-all;
+			white-space: nowrap;
 		}
 
-			.calendar .day.active:hover {
-				border: 1px solid black;
-			}
+@media (min-width: 768px) {
+	.calendar .legend {
+		margin-top: 60px;
+	}
 
-		.calendar .day.work {
-			background-color: green;
+		.calendar .legend div {
+			display: block;
+		}
+}
+
+.calendar .day, calendar .header .day {
+	padding: 15px 0;
+	text-align: center;
+	border: 1px solid white;
+	border-style: solid;
+	width: 20%;
+}
+
+	.calendar .day.active {
+		cursor: pointer;
+		border: 1px solid white;
+		font-weight: lighter;
+	}
+
+		.calendar .day.active:hover {
+			border: 1px double black;
 		}
 
-		.calendar .day.holiday {
-			background-color: silver;
-		}
+	.calendar .day.work, .calendar .legend .work {
+		background-color: #00b050;
+	}
 
+	.calendar .day.holiday, .calendar .legend .holiday {
+		background-color: #a6a6a6;
+	}
 
-		.calendar .day.vacation {
-			background-color: gray;
-		}
+	.calendar .day.dayoff, .calendar .legend .dayoff{
+		background-color: red;
+	}
+
+	.calendar .day.sickleave, .calendar .legend .sickleave {
+		background-color: #ffc000;
+	}
