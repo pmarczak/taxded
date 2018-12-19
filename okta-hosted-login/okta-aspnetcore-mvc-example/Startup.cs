@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Okta.AspNetCore;
 
 namespace TaxDeductionReporting
 {
 	using Microsoft.AspNetCore.Authentication.Cookies;
+	using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+	using Microsoft.IdentityModel.Tokens;
+	using Okta.Sdk;
+	using Okta.Sdk.Configuration;
 
 	public class Startup
 	{
@@ -18,27 +21,47 @@ namespace TaxDeductionReporting
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var oktaMvcOptions = new OktaMvcOptions();
-			Configuration.GetSection("Okta").Bind(oktaMvcOptions);
-			oktaMvcOptions.Scope = new List<string> { "openid", "profile", "email" };
-			oktaMvcOptions.GetClaimsFromUserInfoEndpoint = true;
+			IConfigurationSection openIdOptions = Configuration.GetSection("Okta");
 
-			//services.AddAuthentication(options =>
-			//{
-			//	options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			//	options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			//	options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
-			//})
-			//.AddCookie()
-			//.AddOktaMvc(oktaMvcOptions);
+			services.AddAuthentication(options =>
+				{
+					options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+					options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+					options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+				})
+			.AddCookie()
+			.AddOpenIdConnect(options =>
+				{
+					options.ClientId = openIdOptions["ClientId"];
+					options.ClientSecret = openIdOptions["ClientSecret"];
+					options.Authority = openIdOptions["Issuer"];
+					options.CallbackPath = "/authorization-code/callback";
+					options.ResponseType = OpenIdConnectResponseType.Code;
+					options.SaveTokens = true;
+					options.UseTokenLifetime = false;
+					options.GetClaimsFromUserInfoEndpoint = true;
+					options.Scope.Add("openid");
+					options.Scope.Add("profile");
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						NameClaimType = "name"
+					};
+				});
+
+			services.AddSingleton<IOktaClient>
+			(
+				new OktaClient(new OktaClientConfiguration
+				{
+					OktaDomain = openIdOptions["OktaDomain"],
+					Token = openIdOptions["APIToken"]
+				})
+			);
 
 			services.AddMvc();
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -53,6 +76,7 @@ namespace TaxDeductionReporting
 
 			app.UseStaticFiles();
 			app.UseAuthentication();
+
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
@@ -60,5 +84,7 @@ namespace TaxDeductionReporting
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
+
+
 	}
 }
