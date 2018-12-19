@@ -26,14 +26,14 @@ namespace TaxDeductionReporting
 			oktaMvcOptions.Scope = new List<string> { "openid", "profile", "email" };
 			oktaMvcOptions.GetClaimsFromUserInfoEndpoint = true;
 
-			services.AddAuthentication(options =>
-			{
-				options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
-			})
-			.AddCookie()
-			.AddOktaMvc(oktaMvcOptions);
+			//services.AddAuthentication(options =>
+			//{
+			//	options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//	options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//	options.DefaultChallengeScheme = OktaDefaults.MvcAuthenticationScheme;
+			//})
+			//.AddCookie()
+			//.AddOktaMvc(oktaMvcOptions);
 
 			services.AddMvc();
 		}

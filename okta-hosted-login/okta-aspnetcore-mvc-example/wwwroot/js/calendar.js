@@ -1,4 +1,4 @@
-﻿var dayStates = ['work', 'holiday', 'vacation'];
+﻿var dayStates = ['work', 'dayoff', 'sickleave', 'holiday'];
 
 
 $('.calendar .day.active').on('click',

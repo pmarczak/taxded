@@ -3,7 +3,8 @@
 	public enum CalendarDayType
 	{
 		Work = 1,
-		Holiday = 2,
-		Vacation = 3,
+		DayOff = 2,
+		SickLeave = 3,
+		Holiday = 4
 	}
 }

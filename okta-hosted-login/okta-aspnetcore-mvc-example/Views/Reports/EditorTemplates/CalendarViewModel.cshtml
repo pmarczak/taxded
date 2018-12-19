@@ -49,12 +49,15 @@
 		</table>
 	</div>
 	
-	<div class="col-md-4 legenda">
+	<div class="col-md-4 legend">
 		
 		@foreach (CalendarDayType t in Enum.GetValues(typeof(CalendarDayType)))
 		{
 			<div>
-				<span>@t</span>
+				<span>
+					<img class="@t.ToString().ToLower()" width="16" height="16" />
+					@t
+				</span>
 			</div>
 		}
 
