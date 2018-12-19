@@ -59,6 +59,8 @@ a.reports-create {
 		.calendar .legend div {
 			display: inline;
 			margin-right: 5px;
+			word-break: keep-all;
+			white-space: nowrap;
 		}
 
 @media (min-width: 768px) {
@@ -81,24 +83,26 @@ a.reports-create {
 
 	.calendar .day.active {
 		cursor: pointer;
+		border: 1px solid white;
+		font-weight: lighter;
 	}
 
 		.calendar .day.active:hover {
-			border: 1px solid black;
+			border: 1px double black;
 		}
 
 	.calendar .day.work, .calendar .legend .work {
-		background-color: green;
+		background-color: #00b050;
 	}
 
-	.calendar .day.holiday, .calendar .legend .holiday{
-		background-color: gray;
+	.calendar .day.holiday, .calendar .legend .holiday {
+		background-color: #a6a6a6;
 	}
 
 	.calendar .day.dayoff, .calendar .legend .dayoff{
 		background-color: red;
 	}
 
-	.calendar .day.sickleave, .calendar .legend .sickleave{
-		background-color: yellow;
+	.calendar .day.sickleave, .calendar .legend .sickleave {
+		background-color: #ffc000;
 	}

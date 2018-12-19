@@ -5,18 +5,27 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Creating report for @Model.Date.ToString("Y")</h2>
+<h3>Creating report for @Model.Date.ToString("Y")</h3>
 
 <div class="row">
-	<div class="col-md-8">
+
+	<div class="col-12">
 		<form asp-action="Create">
 			<input type="hidden" name="year" value="@Model.Date.Year" />
 			<input type="hidden" name="month" value="@Model.Date.Month" />
 
 
-			@Html.EditorFor(x => x.Calendar)
-			@Html.DisplayFor(x => x.Tickets, "TicketsTemplate")
+			<h4>Calendar</h4>
+			<hr />
+			<p>
+				@Html.EditorFor(x => x.Calendar)
+			</p>
 
+			<h4>JIRA tickets</h4>
+			<hr />
+			<p>
+				@Html.DisplayFor(x => x.Tickets, "TicketsTemplate")
+			</p>
 
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
@@ -24,6 +33,7 @@
 			</div>
 		</form>
 	</div>
+
 </div>
 
 
