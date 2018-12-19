@@ -1,0 +1,19 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"noImplicitAny": true,
+		"noEmitOnError": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"target": "es5",
+		"outDir": "../wwwroot/js",
+		"moduleResolution": "node",
+		"lib": [
+			"es2016",
+			"dom"
+		]
+	},
+	"files": [
+		"app.ts"
+	]
+}

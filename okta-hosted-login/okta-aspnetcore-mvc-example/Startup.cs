@@ -7,6 +7,7 @@ namespace TaxDeductionReporting
 {
 	using Microsoft.AspNetCore.Authentication.Cookies;
 	using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 	using Microsoft.IdentityModel.Tokens;
 	using Okta.Sdk;
@@ -59,7 +60,7 @@ namespace TaxDeductionReporting
 				})
 			);
 
-			services.AddMvc();
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -74,6 +75,7 @@ namespace TaxDeductionReporting
 				app.UseExceptionHandler("/Home/Error");
 			}
 
+			app.UseDefaultFiles();
 			app.UseStaticFiles();
 			app.UseAuthentication();
 
