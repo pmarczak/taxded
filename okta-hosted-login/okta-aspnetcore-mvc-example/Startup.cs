@@ -25,39 +25,39 @@ namespace TaxDeductionReporting
 		{
 			IConfigurationSection openIdOptions = Configuration.GetSection("Okta");
 
-			services.AddAuthentication(options =>
-				{
-					options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-					options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-					options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-				})
-			.AddCookie()
-			.AddOpenIdConnect(options =>
-				{
-					options.ClientId = openIdOptions["ClientId"];
-					options.ClientSecret = openIdOptions["ClientSecret"];
-					options.Authority = openIdOptions["Issuer"];
-					options.CallbackPath = "/authorization-code/callback";
-					options.ResponseType = OpenIdConnectResponseType.Code;
-					options.SaveTokens = true;
-					options.UseTokenLifetime = false;
-					options.GetClaimsFromUserInfoEndpoint = true;
-					options.Scope.Add("openid");
-					options.Scope.Add("profile");
-					options.TokenValidationParameters = new TokenValidationParameters
-					{
-						NameClaimType = "name"
-					};
-				});
+			//services.AddAuthentication(options =>
+			//	{
+			//		options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//		options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			//		options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+			//	})
+			//.AddCookie()
+			//.AddOpenIdConnect(options =>
+			//	{
+			//		options.ClientId = openIdOptions["ClientId"];
+			//		options.ClientSecret = openIdOptions["ClientSecret"];
+			//		options.Authority = openIdOptions["Issuer"];
+			//		options.CallbackPath = "/authorization-code/callback";
+			//		options.ResponseType = OpenIdConnectResponseType.Code;
+			//		options.SaveTokens = true;
+			//		options.UseTokenLifetime = false;
+			//		options.GetClaimsFromUserInfoEndpoint = true;
+			//		options.Scope.Add("openid");
+			//		options.Scope.Add("profile");
+			//		options.TokenValidationParameters = new TokenValidationParameters
+			//		{
+			//			NameClaimType = "name"
+			//		};
+			//	});
 
-			services.AddSingleton<IOktaClient>
-			(
-				new OktaClient(new OktaClientConfiguration
-				{
-					OktaDomain = openIdOptions["OktaDomain"],
-					Token = openIdOptions["APIToken"]
-				})
-			);
+			//services.AddSingleton<IOktaClient>
+			//(
+			//	new OktaClient(new OktaClientConfiguration
+			//	{
+			//		OktaDomain = openIdOptions["OktaDomain"],
+			//		Token = openIdOptions["APIToken"]
+			//	})
+			//);
 
 			services.AddMvc();
 		}
